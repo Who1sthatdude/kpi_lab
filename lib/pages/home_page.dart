@@ -8,12 +8,13 @@ import '../components/list_translate.dart';
 import '../components/avatar.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, required this.title}) : super(key: key);
+  HomePage({Key? key, required this.title, required this.switchTheme}) : super(key: key);
 
   final String title;
+  Function switchTheme;
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(switchTheme);
 }
 
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   Language _firstLanguage = Language('en', 'English', true, true, true);
   Language _secondLanguage = Language('es', 'Spanish', true, true, true);
   FocusNode _textFocusNode = FocusNode();
+  Function switchTheme;
 
   int _counter = 0;
   int _selectedIndex = 0;
@@ -53,12 +55,16 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     );
   }
 
+
+
   void _onLanguageChanged(Language first, Language second) {
     setState(() {
       _firstLanguage = first;
       _secondLanguage = second;
     });
   }
+
+  _HomePageState(this.switchTheme);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +73,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         backgroundColor: const Color(0xFF212121),
         child: const Icon(Icons.add, color: Colors.white, size: 24),
         onPressed: (){
-          changeCounter();
+          switchTheme();
         },
       ),
 
