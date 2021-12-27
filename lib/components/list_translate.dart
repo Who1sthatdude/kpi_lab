@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kpi_lab/models/saved_words.dart';
+import 'package:provider/provider.dart';
 import '../models/translated.dart';
 
 class ListTranslate extends StatefulWidget {
@@ -23,7 +25,7 @@ class _ListTranslateState extends State<ListTranslate> {
     TranslatedWord(
       "jigsaw",
       "головоломка",
-      true,
+      false,
     ),
     TranslatedWord(
       "serve",
@@ -33,7 +35,7 @@ class _ListTranslateState extends State<ListTranslate> {
     TranslatedWord(
       "knowledge",
       "знание",
-      true,
+      false,
     ),
   ];
 
@@ -74,7 +76,18 @@ class _ListTranslateState extends State<ListTranslate> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                if(_items[index].isFavourite) {
+                  Provider.of<SavedWords>(context, listen: false).remove(
+                      _items[index]);
+                }else {
+                  Provider.of<SavedWords>(context, listen: false).add(
+                      _items[index]);
+                }
+                setState(() {
+                  _items[index].isFavourite = !_items[index].isFavourite;
+                });
+              },
               icon: Icon(
                 _items[index].isFavourite ? Icons.star : Icons.star_border,
                 size: 23.0,

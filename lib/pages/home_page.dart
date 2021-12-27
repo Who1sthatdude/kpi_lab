@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kpi_lab/pages/saved_words_page.dart';
 import '../components/translate_input.dart';
 import '../models/language.dart';
 import '../components/choose_language.dart';
@@ -34,6 +35,22 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     setState(() {
       _selectedIndex = index;
     });
+    if(_selectedIndex == 1)
+    {
+      getSavedWordsPage(widget.title);
+    }
+  }
+
+  void getSavedWordsPage(String title) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            SavedWordsPage(
+              title: title,
+            ),
+      ),
+    );
   }
 
   void _onLanguageChanged(Language first, Language second) {
@@ -110,6 +127,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           BottomNavigationBarItem(
             icon: Icon(Icons.star),
             label: 'Saved',
+
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings),
