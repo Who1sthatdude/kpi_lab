@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:kpi_lab/pages/animations_page.dart';
+import 'package:kpi_lab/pages/saved_words_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/home_page.dart';
@@ -87,7 +89,12 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         brightness: isDarkTheme ? Brightness.dark : Brightness.light,
       ),
-      home: HomePage(title: 'Google Translate', switchTheme: switchTheme),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(title: 'Google Translate', switchTheme: switchTheme),
+        '/saved': (context) => SavedWordsPage(title: 'Google translate'),
+        '/animation': (context) => CustomAnimation(title: 'Google translate')
+      },
       themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
     );
   }
